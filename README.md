@@ -101,38 +101,39 @@ sait2/
 └── README.md             # This file
 ```
 
-## Deployment
+## Deployment & Domain Setup
 
-### Option 1: VPS/Cloud Server (Recommended)
+📖 **Подробная инструкция по подключению домена:** См. [DEPLOY.md](./DEPLOY.md)
 
-1. **Upload files** to your server
-2. **Install Node.js** (v14 or higher)
-3. **Install dependencies**: `npm install`
-4. **Use PM2** for process management:
+### Быстрый старт с Vercel (Рекомендуется)
+
+1. **Установите Vercel CLI:**
    ```bash
-   npm install -g pm2
-   pm2 start server.js --name kishamba-portfolio
-   pm2 save
-   pm2 startup
+   npm i -g vercel
    ```
-5. **Configure Nginx** as reverse proxy
-6. **Setup SSL** with Let's Encrypt
 
-### Option 2: Heroku
-
-1. Create `Procfile`:
-   ```
-   web: node server.js
-   ```
-2. Deploy:
+2. **Деплой:**
    ```bash
-   heroku create kishamba-portfolio
-   git push heroku main
+   vercel login
+   vercel
    ```
 
-### Option 3: Vercel/Netlify
+3. **Настройте переменные окружения** в панели Vercel:
+   - `TELEGRAM_BOT_TOKEN`
+   - `TELEGRAM_CHAT_ID`
+   - `WHATSAPP_NUMBER`
 
-For static hosting, you'll need to modify the backend to use serverless functions.
+4. **Подключите домен:**
+   - В настройках проекта → Domains → Add Domain
+   - Настройте DNS записи у регистратора домена
+
+### Другие варианты
+
+- **Railway** - отлично для Node.js приложений
+- **Render** - бесплатный хостинг с простым деплоем
+- **VPS сервер** - полный контроль (DigitalOcean, Hetzner, AWS)
+
+Подробные инструкции для всех платформ в [DEPLOY.md](./DEPLOY.md)
 
 ## Environment Variables
 
