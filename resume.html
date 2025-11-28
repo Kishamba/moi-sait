@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Алексей Лазарев - Резюме</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Cairo:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="resume-styles.css">
+
+    <!-- PDF Generation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script src="translations.js"></script>
+</head>
+
+<body>
+    <!-- Fixed Controls Header -->
+    <div class="controls-header">
+        <div class="controls-left">
+            <a href="/" class="back-btn">
+                <i class="fas fa-arrow-left"></i> <span data-i18n="res_back">Назад</span>
+            </a>
+            <div class="lang-switcher">
+                <button class="lang-btn active" data-lang="ru">RU</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ar">AR</button>
+                <button class="lang-btn" data-lang="zh">ZH</button>
+            </div>
+        </div>
+        <div class="controls-right">
+            <div class="action-buttons">
+                <button class="action-btn print-btn" onclick="window.print()">
+                    <i class="fas fa-print"></i> <span data-i18n="res_btn_print">Распечатать</span>
+                </button>
+                <button class="action-btn pdf-btn" id="downloadPdfBtn">
+                    <i class="fas fa-file-pdf"></i> <span data-i18n="res_btn_pdf">Скачать PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Chat Button -->
+    <button class="chat-float" id="chatBtn" title="Написать в Telegram">
+        <i class="fab fa-telegram"></i>
+    </button>
+
+    <!-- Chat Modal -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-modal-content">
+            <button class="chat-close" id="chatClose">&times;</button>
+            <h3 data-i18n="res_chat_title">Написать сообщение</h3>
+            <form id="chatForm">
+                <div class="form-group">
+                    <input type="text" id="chatName" data-i18n="res_chat_name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="chatEmail" data-i18n="res_chat_email" placeholder="Ваш Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea id="chatMessage" rows="4" data-i18n="res_chat_msg" placeholder="Ваше сообщение"
+                        required></textarea>
+                </div>
+                <button type="submit" class="chat-submit">
+                    <i class="fas fa-paper-plane"></i> <span data-i18n="res_chat_send">Отправить</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="resume-container">
+        <!-- Header -->
+        <header class="resume-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="profile-photo">
+                        <img src="images/me.JPG" alt="Alexey Lazarev">
+                    </div>
+                </div>
+                <div class="header-right">
+                    <h1 data-i18n="res_name">Алексей Лазарев</h1>
+                    <p class="job-titles" data-i18n="res_titles">Event Manager • Overlay Manager • Technical Director
+                    </p>
+                    <div class="contact-info">
+                        <span><i class="fas fa-map-marker-alt"></i> <span data-i18n="res_location">Москва (готов к
+                                переезду)</span></span>
+                        <span><i class="fas fa-phone"></i> <span data-i18n="res_phone">+7 903 556 06 26</span></span>
+                        <span><i class="fas fa-envelope"></i> <a href="mailto:Alexlaza1@gmail.com"
+                                class="contact-link"><span data-i18n="res_email">Alexlaza1@gmail.com</span></a></span>
+                        <span><i class="fab fa-linkedin"></i> <a
+                                href="https://www.linkedin.com/in/aleksey-lazarev-bb913167/" target="_blank"
+                                class="contact-link"><span data-i18n="res_linkedin">LinkedIn</span></a></span>
+                        <span><i class="fab fa-facebook"></i> <a href="#" class="contact-link"><span
+                                    data-i18n="res_facebook">Facebook</span></a></span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="resume-body">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <section class="sidebar-section">
+                    <h2 data-i18n="res_about_title">Обо мне</h2>
+                    <p data-i18n="res_about_text">Event & Overlay Manager с 20+ годами опыта на международных проектах:
+                        FIFA World Cup, Олимпиада Сочи 2014, AFC Asian Cup, Cirque du Soleil, выставки и спортивные
+                        мероприятия мирового уровня.</p>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2 data-i18n="res_skills_title">Ключевые навыки</h2>
+                    <ul class="skills-list">
+                        <li data-i18n="res_skill1">Организация мероприятий</li>
+                        <li data-i18n="res_skill2">Overlay planning</li>
+                        <li data-i18n="res_skill3">Техническое руководство</li>
+                        <li data-i18n="res_skill4">Временные конструкции</li>
+                        <li data-i18n="res_skill5">Механизация сцены</li>
+                        <li data-i18n="res_skill6">Логистика и снабжение</li>
+                        <li data-i18n="res_skill7">Управление командами</li>
+                        <li data-i18n="res_skill8">Тендеры и документация</li>
+                        <li data-i18n="res_skill9">Бюджетирование</li>
+                        <li data-i18n="res_skill10">Безопасность</li>
+                    </ul>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2 data-i18n="res_lang_title">Языки</h2>
+                    <div class="language-item">
+                        <span class="lang-name" data-i18n="res_lang_ru">Русский</span>
+                        <span class="lang-level" data-i18n="res_lang_ru_level">Родной</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="lang-name" data-i18n="res_lang_en">Английский</span>
+                        <span class="lang-level" data-i18n="res_lang_en_level">Продвинутый</span>
+                    </div>
+                    <div class="language-item">
+                        <span class="lang-name" data-i18n="res_lang_es">Испанский</span>
+                        <span class="lang-level" data-i18n="res_lang_es_level">Базовый</span>
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2 data-i18n="res_edu_title">Образование</h2>
+                    <div class="education-item">
+                        <h3 data-i18n="res_edu_1_name">МГУЛ</h3>
+                        <p data-i18n="res_edu_1_desc">Инженер лесного хозяйства</p>
+                    </div>
+                    <div class="education-item">
+                        <h3 data-i18n="res_edu_2_name">Первый МКП</h3>
+                        <p data-i18n="res_edu_2_desc">Инженер медоптики</p>
+                    </div>
+                    <div class="education-item">
+                        <h3 data-i18n="res_edu_3_name">Курсы</h3>
+                        <p data-i18n="res_edu_3_desc">Охрана труда, пожарная безопасность, первая помощь</p>
+                    </div>
+                </section>
+
+                <section class="sidebar-section">
+                    <h2 data-i18n="res_personal_title">Личное</h2>
+                    <ul class="personal-list">
+                        <li><i class="fas fa-birthday-cake"></i> <span data-i18n="res_pers_dob">30.09.1987</span></li>
+                        <li><i class="fas fa-car"></i> <span data-i18n="res_pers_drive">Категория B</span></li>
+                        <li><i class="fas fa-users"></i> <span data-i18n="res_pers_family">Семейный</span></li>
+                        <li><i class="fas fa-plane"></i> <span data-i18n="res_pers_relocate">Готов к переезду</span>
+                        </li>
+                    </ul>
+                </section>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <section class="summary-section">
+                    <h2 class="section-title" data-i18n="res_profile_title">Профессиональный профиль</h2>
+                    <p data-i18n="res_profile_text">Специалист с 20+ годами опыта в международном event-продакшене.
+                        Эксперт в временных конструкциях, координации крупных команд, техническом руководстве, монтаже
+                        сценических систем и управлении мероприятиями мирового уровня. Опыт работы на FIFA World Cup,
+                        AFC Asian Cup, Olympic Games Sochi 2014, шоу Cirque du Soleil и крупных культурных/спортивных
+                        проектах.</p>
+                </section>
+
+                <section class="experience-section">
+                    <h2 class="section-title" data-i18n="res_exp_title">Опыт работы</h2>
+
+                    <!-- Job 1 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job1_company">Circus Show</h3>
+                                <h4 data-i18n="res_job1_title">Генеральный стейдж-менеджер / Технический директор</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job1_period">2024 – н.в.</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job1_loc">Ереван, Армения</span>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job1_d1">Полное сопровождение шоу и взаимодействие с режиссёром</li>
+                            <li data-i18n="res_job1_d2">Монтаж и обслуживание сценического оборудования</li>
+                            <li data-i18n="res_job1_d3">Создание и ремонт реквизита, операция механизированной сцены
+                            </li>
+                            <li data-i18n="res_job1_d4">Ежедневные технические отчёты и поддержка выступлений</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 2 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job2_company">Оргкомитет Всемирных игр дружбы</h3>
+                                <h4 data-i18n="res_job2_title">Менеджер временной инфраструктуры (Overlay)</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job2_period">2024</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job2_loc">Москва, Россия</span>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job2_d1">Разработка overlay-решений для 7 стадионов</li>
+                            <li data-i18n="res_job2_d2">Подготовка технической документации и чарта объектов</li>
+                            <li data-i18n="res_job2_d3">Участие в тендерах и переговорах с подрядчиками</li>
+                            <li data-i18n="res_job2_d4">Контроль монтажа, демонтажа, логистики и соответствия стандартам
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 3 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job3_company">United for Manpower Solutions</h3>
+                                <h4 data-i18n="res_job3_title">Overlay Manager / Supervisor</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job3_period">2021 – 2024</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job3_loc">Доха, Катар</span>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job3_d1">Подготовка стадионов для FIFA World Cup, AFC Asian Cup</li>
+                            <li data-i18n="res_job3_d2">Руководство международными командами до 27 человек</li>
+                            <li data-i18n="res_job3_d3">Контроль работ по электрике, брендингу, кабинам, ограждениям
+                            </li>
+                            <li data-i18n="res_job3_d4">Составление документации, планов, расписаний</li>
+                            <li data-i18n="res_job3_d5">Контроль выполнения мастер-планов и соответствия требованиям
+                                FIFA</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 4 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job4_company">Röder Russia</h3>
+                                <h4 data-i18n="res_job4_title">Технический менеджер</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job4_period">2023</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job4_loc">Москва, Россия</span>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job4_d1">Технический надзор за монтажом выставочных павильонов</li>
+                            <li data-i18n="res_job4_d2">Контроль качества и сроков исполнения</li>
+                            <li data-i18n="res_job4_d3">Управление персоналом и транспортом на проекте «Россия XXI век»
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 5 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job5_company">StageHand Production</h3>
+                                <h4 data-i18n="res_job5_title">Генеральный директор</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job5_period">2016 – 2019</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job5_loc">Москва, Россия</span>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job5_d1">Организация работ на FIFA World Cup 2018 и Confederations Cup
+                                2017</li>
+                            <li data-i18n="res_job5_d2">Управление командами, монтажами, логистикой</li>
+                            <li data-i18n="res_job5_d3">Участие в тендерах, контроль бюджета</li>
+                            <li data-i18n="res_job5_d4">Создание частных и корпоративных мероприятий под ключ</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 6 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job6_company">Cirque du Soleil (45 Degrees)</h3>
+                                <h4 data-i18n="res_job6_title">Staging Automation Technician / Бригадир</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job6_period">2010 – 2016</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job6_loc">Москва, Россия</span>
+                        <p class="job-desc" data-i18n="res_job6_shows">Шоу: Corteo, Kooza, Zarkana, Varekai, Saltimbanco
+                        </p>
+                        <ul class="job-duties">
+                            <li data-i18n="res_job6_d1">Работа с автоматизированными механизмами сцены</li>
+                            <li data-i18n="res_job6_d2">Локальный бригадир и переводчик</li>
+                            <li data-i18n="res_job6_d3">Организация монтажа и демонтажа реквизита</li>
+                            <li data-i18n="res_job6_d4">Обеспечение безопасности и точной работы механизмов</li>
+                        </ul>
+                    </div>
+
+                    <!-- Job 7 -->
+                    <div class="job">
+                        <div class="job-header">
+                            <div>
+                                <h3 data-i18n="res_job7_company">Vivat Group</h3>
+                                <h4 data-i18n="res_job7_title">Старший менеджер</h4>
+                            </div>
+                            <span class="job-period" data-i18n="res_job7_period">2013 – 2014</span>
+                        </div>
+                        <span class="job-location" data-i18n="res_job7_loc">Сочи, Россия • Олимпиада 2014</span>
+                        <p class="job-desc" data-i18n="res_job7_desc">Управление 500+ монтажниками, логистика, снабжение
+                            церемоний открытия и закрытия</p>
+                    </div>
+
+                    <!-- Additional Experience -->
+                    <div class="additional-experience">
+                        <h3 data-i18n="res_add_exp_title">Дополнительный опыт</h3>
+                        <div class="compact-jobs">
+                            <div class="compact-job">
+                                <strong data-i18n="res_add_job1_company">MF Group</strong> - <span
+                                    data-i18n="res_add_job1_role">Региональный супервайзер</span>
+                                <p data-i18n="res_add_job1_desc">Монтаж, логистика объектов в Краснодарском крае</p>
+                            </div>
+                            <div class="compact-job">
+                                <strong data-i18n="res_add_job2_company">Spin Music Service</strong> - <span
+                                    data-i18n="res_add_job2_role">Ассистент техдиректора</span>
+                                <p data-i18n="res_add_job2_desc">Работа с райдерами, графиками, площадками</p>
+                            </div>
+                            <div class="compact-job">
+                                <strong data-i18n="res_add_job3_company">Cometa Production</strong> - <span
+                                    data-i18n="res_add_job3_role">Старший техник</span>
+                                <p data-i18n="res_add_job3_desc">Евровидение 2009, Cartier, Dior, Madonna</p>
+                            </div>
+                            <div class="compact-job">
+                                <strong data-i18n="res_add_job4_company">Abd Entertainment</strong> - <span
+                                    data-i18n="res_add_job4_role">Менеджер мероприятий</span>
+                                <p data-i18n="res_add_job4_desc">Организация технической части мероприятий</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Language Management
+        let currentLang = localStorage.getItem('language') || 'ru';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('language', lang);
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update text
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang] && translations[lang][key]) {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = translations[lang][key];
+                    } else {
+                        el.textContent = translations[lang][key];
+                    }
+                }
+            });
+
+            // RTL support
+            if (lang === 'ar') {
+                document.body.classList.add('rtl');
+                document.documentElement.dir = 'rtl';
+            } else {
+                document.body.classList.remove('rtl');
+                document.documentElement.dir = 'ltr';
+            }
+        }
+
+        // Initialize Language
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+
+            // Language Switcher Listeners
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    setLanguage(btn.dataset.lang);
+                });
+            });
+        });
+
+        // Chat Modal
+        const chatBtn = document.getElementById('chatBtn');
+        const chatModal = document.getElementById('chatModal');
+        const chatClose = document.getElementById('chatClose');
+        const chatForm = document.getElementById('chatForm');
+
+        chatBtn.addEventListener('click', () => {
+            chatModal.classList.add('show');
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatModal.classList.remove('show');
+        });
+
+        chatModal.addEventListener('click', (e) => {
+            if (e.target === chatModal) {
+                chatModal.classList.remove('show');
+            }
+        });
+
+        // Chat Form Submit
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('chatName').value;
+            const email = document.getElementById('chatEmail').value;
+            const message = document.getElementById('chatMessage').value;
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                if (response.ok) {
+                    alert('Сообщение отправлено! Спасибо за обращение.');
+                    chatForm.reset();
+                    chatModal.classList.remove('show');
+                } else {
+                    alert('Ошибка отправки. Попробуйте позже.');
+                }
+            } catch (error) {
+                alert('Ошибка отправки. Попробуйте позже.');
+            }
+        });
+
+        // Download PDF using dom-to-image and jsPDF
+        document.getElementById('downloadPdfBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('downloadPdfBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            btn.disabled = true;
+
+            try {
+                // Ensure fonts are loaded
+                await document.fonts.ready;
+
+                // Elements to hide
+                const controlsHeader = document.querySelector('.controls-header');
+                const chatFloat = document.querySelector('.chat-float');
+                const resumeContainer = document.querySelector('.resume-container');
+
+                // Scroll to top
+                window.scrollTo(0, 0);
+
+                // Hide controls
+                controlsHeader.style.display = 'none';
+                chatFloat.style.display = 'none';
+
+                // Add PDF mode class
+                resumeContainer.classList.add('pdf-mode');
+
+                // Wait a moment for layout to stabilize
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Generate PNG using dom-to-image
+                const dataUrl = await domtoimage.toPng(resumeContainer, {
+                    quality: 1.0,
+                    bgcolor: '#ffffff'
+                });
+
+                // Initialize jsPDF
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                // Calculate dimensions
+                const imgProps = pdf.getImageProperties(dataUrl);
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+                // Add image to PDF
+                // If height > A4 height, we might need multiple pages, but for now let's fit or split
+                // Simple fit for single page resume, or split for multi-page
+
+                const pageHeight = pdf.internal.pageSize.getHeight();
+                let heightLeft = pdfHeight;
+                let position = 0;
+
+                pdf.addImage(dataUrl, 'PNG', 0, position, pdfWidth, pdfHeight);
+                heightLeft -= pageHeight;
+
+                while (heightLeft >= 0) {
+                    position = heightLeft - pdfHeight;
+                    pdf.addPage();
+                    pdf.addImage(dataUrl, 'PNG', 0, position, pdfWidth, pdfHeight);
+                    heightLeft -= pageHeight;
+                }
+
+                pdf.save('Aleksey_Lazarev_Resume.pdf');
+
+            } catch (error) {
+                console.error('PDF generation error:', error);
+                alert('Ошибка генерации PDF. Попробуйте еще раз.');
+            } finally {
+                // Restore UI
+                const controlsHeader = document.querySelector('.controls-header');
+                const chatFloat = document.querySelector('.chat-float');
+                const resumeContainer = document.querySelector('.resume-container');
+
+                resumeContainer.classList.remove('pdf-mode');
+                controlsHeader.style.display = 'flex';
+                chatFloat.style.display = 'flex';
+
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
