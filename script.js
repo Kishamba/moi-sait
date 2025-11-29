@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
     initContactForm();
     initResumeDownload();
-    initWhatsApp();
+
     trackVisitor();
 });
 
@@ -351,7 +351,7 @@ function initResumeDownload() {
 
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
-            window.open('/resume.html', '_blank');
+            window.open('resume.html', '_blank');
         });
     }
 }

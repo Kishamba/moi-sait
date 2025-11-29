@@ -9,7 +9,22 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Telegram Bot Setup
-const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
+const token = process.env.TELEGRAM_BOT_TOKEN;
+let bot;
+
+if (token) {
+  bot = new TelegramBot(token, { polling: true });
+} else {
+  console.warn('⚠️ TELEGRAM_BOT_TOKEN is missing. Telegram features will be disabled.');
+  // Mock bot to prevent crashes
+  bot = {
+    onText: () => { },
+    on: () => { },
+    sendMessage: async () => { console.log('Mock Bot: Message sent (simulated)'); },
+    answerCallbackQuery: async () => { console.log('Mock Bot: Callback answered (simulated)'); }
+  };
+}
+
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // Middleware
@@ -43,7 +58,7 @@ async function getIPInfo(ip) {
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
   const welcomeMessage = `👋 Привет! Я бот сайта Kishamba Portfolio.\n\nЯ буду отправлять вам уведомления о:\n• 👁 Посетителях сайта\n• 📥 Скачиваниях резюме\n• 💬 Новых сообщениях\n\nИспользуйте кнопки ниже для управления:`;
-  
+
   const keyboard = {
     reply_markup: {
       keyboard: [
@@ -53,7 +68,7 @@ bot.onText(/\/start/, (msg) => {
       resize_keyboard: true
     }
   };
-  
+
   bot.sendMessage(chatId, welcomeMessage, keyboard);
 });
 
@@ -117,15 +132,15 @@ app.post('/api/visitor', async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const { language, userAgent } = req.body;
-    
+
     const ipInfo = await getIPInfo(ip);
-    
+
     const message = `👁 *Новый посетитель на сайте!*\n\n` +
       `🌍 IP: \`${ipInfo.ip}\`\n` +
       `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name}\n` +
       `🗣 Язык: ${language}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
-    
+
     const keyboard = {
       reply_markup: {
         inline_keyboard: [
@@ -134,9 +149,9 @@ app.post('/api/visitor', async (req, res) => {
         ]
       }
     };
-    
+
     await bot.sendMessage(CHAT_ID, message, { parse_mode: 'Markdown', ...keyboard });
-    
+
     res.json({ success: true, location: ipInfo });
   } catch (error) {
     console.error('Error tracking visitor:', error);
@@ -149,15 +164,15 @@ app.post('/api/download', async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const { language } = req.body;
-    
+
     const ipInfo = await getIPInfo(ip);
-    
+
     const message = `📥 *Скачивание резюме!*\n\n` +
       `🌍 IP: \`${ipInfo.ip}\`\n` +
       `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name}\n` +
       `🗣 Язык: ${language}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
-    
+
     const keyboard = {
       reply_markup: {
         inline_keyboard: [
@@ -166,9 +181,9 @@ app.post('/api/download', async (req, res) => {
         ]
       }
     };
-    
+
     await bot.sendMessage(CHAT_ID, message, { parse_mode: 'Markdown', ...keyboard });
-    
+
     res.json({ success: true });
   } catch (error) {
     console.error('Error tracking download:', error);
@@ -181,9 +196,9 @@ app.post('/api/contact', async (req, res) => {
   try {
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     const { name, email, message, language } = req.body;
-    
+
     const ipInfo = await getIPInfo(ip);
-    
+
     const telegramMessage = `💬 *Новое сообщение с сайта!*\n\n` +
       `👤 Имя: ${name}\n` +
       `📧 Email: ${email}\n` +
@@ -193,19 +208,20 @@ app.post('/api/contact', async (req, res) => {
       `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name}\n` +
       `🗣 Язык: ${language}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
-    
+
+    const whatsappNumber = process.env.WHATSAPP_NUMBER || '';
     const keyboard = {
       reply_markup: {
         inline_keyboard: [
           [{ text: '📧 Ответить на email', url: `mailto:${email}` }],
           [{ text: '💬 Открыть Telegram', url: 'https://t.me/Kishamba' }],
-          [{ text: '📱 WhatsApp', url: `https://wa.me/${process.env.WHATSAPP_NUMBER}` }]
+          [{ text: '📱 WhatsApp', url: `https://wa.me/${whatsappNumber}` }]
         ]
       }
     };
-    
+
     await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown', ...keyboard });
-    
+
     res.json({ success: true });
   } catch (error) {
     console.error('Error sending contact message:', error);
@@ -222,7 +238,7 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
   console.log(`🤖 Telegram bot is active`);
-  
+
   // Send startup notification
   bot.sendMessage(CHAT_ID, `✅ Сервер запущен!\n🌐 http://localhost:${PORT}\n⏰ ${new Date().toLocaleString('ru-RU')}`);
 });
