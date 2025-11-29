@@ -16,14 +16,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ===== LANGUAGE MANAGEMENT =====
 function initLanguage() {
-    // Get saved language or detect browser language
+    // Get saved language or default to English
     const savedLang = localStorage.getItem('language');
-    const browserLang = navigator.language.split('-')[0];
 
     if (savedLang) {
         currentLang = savedLang;
-    } else if (['en', 'ru', 'ar', 'zh'].includes(browserLang)) {
-        currentLang = browserLang;
+    } else {
+        currentLang = 'en'; // Always start with English
     }
 
     setLanguage(currentLang);
