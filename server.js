@@ -91,7 +91,7 @@ bot.on('message', (msg) => {
     };
     bot.sendMessage(chatId, '⚙️ Настройки:', settingsKeyboard);
   } else if (text === '🌐 Открыть сайт') {
-    bot.sendMessage(chatId, '🌐 Ваш сайт: http://localhost:3000\n\n(После деплоя здесь будет реальный URL)');
+    bot.sendMessage(chatId, '🌐 Ваш сайт: https://kishamba.com');
   } else if (text === 'ℹ️ Помощь') {
     const helpMessage = `ℹ️ Помощь по боту:\n\n📊 Статистика - просмотр статистики посещений\n⚙️ Настройки - настройки уведомлений\n🌐 Открыть сайт - ссылка на ваш сайт\n\nПо всем вопросам: @Kishamba`;
     bot.sendMessage(chatId, helpMessage);
@@ -105,7 +105,7 @@ bot.on('callback_query', (query) => {
 
   if (data === 'view_site') {
     bot.answerCallbackQuery(query.id, { text: 'Открываю сайт...' });
-    bot.sendMessage(chatId, '🌐 http://localhost:3000');
+    bot.sendMessage(chatId, '🌐 https://kishamba.com');
   } else if (data === 'reply_visitor') {
     bot.answerCallbackQuery(query.id, { text: 'Функция в разработке' });
   } else if (data === 'toggle_notifications') {
@@ -245,5 +245,5 @@ app.listen(PORT, () => {
   console.log(`🤖 Telegram bot is active`);
 
   // Send startup notification
-  bot.sendMessage(CHAT_ID, `✅ Сервер запущен!\n🌐 http://localhost:${PORT}\n⏰ ${new Date().toLocaleString('ru-RU')}`);
+  bot.sendMessage(CHAT_ID, `✅ Сервер запущен!\n🌐 https://kishamba.com\n⏰ ${new Date().toLocaleString('ru-RU')}`);
 });
