@@ -220,7 +220,12 @@ app.post('/api/contact', async (req, res) => {
       }
     };
 
-    await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown', ...keyboard });
+    try {
+      await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown', ...keyboard });
+    } catch (botError) {
+      console.error('Telegram Bot Error:', botError.message);
+      // Don't fail the request if just the bot fails, but log it
+    }
 
     res.json({ success: true });
   } catch (error) {
