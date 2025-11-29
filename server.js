@@ -209,14 +209,19 @@ app.post('/api/contact', async (req, res) => {
       `🗣 Язык: ${language}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
 
-    const whatsappNumber = process.env.WHATSAPP_NUMBER || '';
+    const whatsappNumber = process.env.WHATSAPP_NUMBER;
+    const inlineKeyboard = [
+      [{ text: '📧 Ответить на email', url: `mailto:${email}` }],
+      [{ text: '💬 Открыть Telegram', url: 'https://t.me/Kishamba' }]
+    ];
+
+    if (whatsappNumber) {
+      inlineKeyboard.push([{ text: '📱 WhatsApp', url: `https://wa.me/${whatsappNumber}` }]);
+    }
+
     const keyboard = {
       reply_markup: {
-        inline_keyboard: [
-          [{ text: '📧 Ответить на email', url: `mailto:${email}` }],
-          [{ text: '💬 Открыть Telegram', url: 'https://t.me/Kishamba' }],
-          [{ text: '📱 WhatsApp', url: `https://wa.me/${whatsappNumber}` }]
-        ]
+        inline_keyboard: inlineKeyboard
       }
     };
 
