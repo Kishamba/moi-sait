@@ -194,47 +194,44 @@ app.post('/api/download', async (req, res) => {
 // API: Contact form submission
 app.post('/api/contact', async (req, res) => {
   try {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    console.log('📧 Contact form submission received');
+    console.log('Request body:', JSON.stringify(req.body, null, 2));
+
     const { name, email, message, language } = req.body;
 
-    const ipInfo = await getIPInfo(ip);
+    if (!name || !email || !message) {
+      console.error('❌ Missing required fields');
+      return res.status(400).json({ success: false, error: 'Missing required fields' });
+    }
 
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
+    console.log('IP address:', ip);
+
+    // Simple message without IP lookup to avoid rate limits
     const telegramMessage = `💬 *Новое сообщение с сайта!*\n\n` +
       `👤 Имя: ${name}\n` +
       `📧 Email: ${email}\n` +
       `💬 Сообщение:\n${message}\n\n` +
-      `---\n` +
-      `🌍 IP: \`${ipInfo.ip}\`\n` +
-      `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name}\n` +
-      `🗣 Язык: ${language}\n` +
-      `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
+      `🗣 Язык: ${language || 'unknown'}\n` +
+      `⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
 
-    const whatsappNumber = process.env.WHATSAPP_NUMBER;
-    const inlineKeyboard = [
-      [{ text: '📧 Ответить на email', url: `mailto:${email}` }],
-      [{ text: '💬 Открыть Telegram', url: 'https://t.me/Kishamba' }]
-    ];
-
-    if (whatsappNumber) {
-      inlineKeyboard.push([{ text: '📱 WhatsApp', url: `https://wa.me/${whatsappNumber}` }]);
-    }
-
-    const keyboard = {
-      reply_markup: {
-        inline_keyboard: inlineKeyboard
-      }
-    };
+    console.log('Attempting to send Telegram message...');
+    console.log('CHAT_ID:', CHAT_ID);
+    console.log('Bot exists:', !!bot);
 
     try {
-      await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown', ...keyboard });
+      await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown' });
+      console.log('✅ Telegram message sent successfully');
     } catch (botError) {
-      console.error('Telegram Bot Error:', botError.message);
-      // Don't fail the request if just the bot fails, but log it
+      console.error('❌ Telegram Bot Error:', botError.message);
+      console.error('Full error:', JSON.stringify(botError, null, 2));
+      // Don't fail the request if just the bot fails
     }
 
     res.json({ success: true });
   } catch (error) {
-    console.error('Error sending contact message:', error);
+    console.error('❌ Error in contact handler:', error.message);
+    console.error('Stack:', error.stack);
     res.status(500).json({ success: false, error: error.message });
   }
 });
