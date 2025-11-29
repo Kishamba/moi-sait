@@ -392,7 +392,7 @@ section {
 /* ===== ABOUT SECTION ===== */
 .about {
     position: relative;
-    background-image: url('../images/bratany.jpg');
+    background-image: url('images/bratany.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -463,7 +463,7 @@ section {
 /* ===== SERVICES SECTION ===== */
 .services {
     position: relative;
-    background-image: url('../images/sunsetmy.jpg');
+    background-image: url('images/sunsetmy.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
