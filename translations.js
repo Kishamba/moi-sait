@@ -11,7 +11,7 @@ const translations = {
         // Hero Section
         hero_greeting: "Hello, I'm",
         hero_name: "Aleksey Lazarev",
-        hero_title: "Technical Manager | Overlay Manager | Team Leader",
+        hero_title: "Technical Manager | Overlay Manager | Team Player and Builder",
         hero_subtitle: "Delivering world-class event production and technical management services globally",
         hero_cta: "Get in Touch",
         hero_download: "Download Resume",
@@ -131,7 +131,7 @@ const translations = {
         // Hero Section
         hero_greeting: "Привет, я",
         hero_name: "Алексей Лазарев",
-        hero_title: "Технический менеджер | Оверлей менеджер | Руководитель команды",
+        hero_title: "Технический менеджер | Оверлей менеджер | Командный игрок и Лидер",
         hero_subtitle: "Предоставляю услуги мирового уровня в области производства мероприятий и технического менеджмента по всему миру",
         hero_cta: "Связаться",
         hero_download: "Скачать резюме",
@@ -251,7 +251,7 @@ const translations = {
         // Hero Section
         hero_greeting: "مرحباً، أنا",
         hero_name: "أليكسي لازاريف",
-        hero_title: "مدير تقني | مدير التراكب | قائد فريق",
+        hero_title: "مدير تقني | مدير التراكب | لاعب فريق وباني فرق",
         hero_subtitle: "تقديم خدمات إنتاج الفعاليات والإدارة التقنية على مستوى عالمي",
         hero_cta: "تواصل معي",
         hero_download: "تحميل السيرة الذاتية",
@@ -371,7 +371,7 @@ const translations = {
         // Hero Section
         hero_greeting: "你好，我是",
         hero_name: "阿列克谢·拉扎列夫",
-        hero_title: "技术经理 | 覆盖层经理 | 团队领导",
+        hero_title: "技术经理 | 覆盖层经理 | 团队合作者与建设者",
         hero_subtitle: "在全球范围内提供世界级的活动制作和技术管理服务",
         hero_cta: "联系我",
         hero_download: "下载简历",
