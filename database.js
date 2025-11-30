@@ -45,6 +45,13 @@ const addVisitor = db.prepare(`
   VALUES (?, ?, ?, ?, ?, ?)
 `);
 
+// Check for recent visit from same IP (last 30 mins)
+const checkRecentVisit = db.prepare(`
+  SELECT id FROM visitors 
+  WHERE ip = ? AND timestamp > datetime('now', '-30 minutes')
+  LIMIT 1
+`);
+
 // Message tracking
 const addMessage = db.prepare(`
   INSERT INTO messages (name, email, message, ip, country, city, language)
@@ -59,12 +66,12 @@ const addDownload = db.prepare(`
 
 // Statistics queries
 const getStats = {
-    totalVisitors: db.prepare('SELECT COUNT(*) as count FROM visitors'),
-    uniqueVisitors: db.prepare('SELECT COUNT(DISTINCT ip) as count FROM visitors'),
-    totalMessages: db.prepare('SELECT COUNT(*) as count FROM messages'),
-    totalDownloads: db.prepare('SELECT COUNT(*) as count FROM downloads'),
+  totalVisitors: db.prepare('SELECT COUNT(*) as count FROM visitors'),
+  uniqueVisitors: db.prepare('SELECT COUNT(DISTINCT ip) as count FROM visitors'),
+  totalMessages: db.prepare('SELECT COUNT(*) as count FROM messages'),
+  totalDownloads: db.prepare('SELECT COUNT(*) as count FROM downloads'),
 
-    topCountries: db.prepare(`
+  topCountries: db.prepare(`
     SELECT country, COUNT(*) as count 
     FROM visitors 
     WHERE country IS NOT NULL AND country != 'Unknown'
@@ -73,7 +80,7 @@ const getStats = {
     LIMIT 5
   `),
 
-    topReferrers: db.prepare(`
+  topReferrers: db.prepare(`
     SELECT referrer, COUNT(*) as count 
     FROM visitors 
     WHERE referrer IS NOT NULL AND referrer != '' AND referrer != 'direct'
@@ -82,7 +89,7 @@ const getStats = {
     LIMIT 10
   `),
 
-    visitsByDay: db.prepare(`
+  visitsByDay: db.prepare(`
     SELECT DATE(timestamp) as date, COUNT(*) as count 
     FROM visitors 
     WHERE timestamp >= datetime('now', '-30 days')
@@ -90,14 +97,14 @@ const getStats = {
     ORDER BY date DESC
   `),
 
-    recentMessages: db.prepare(`
+  recentMessages: db.prepare(`
     SELECT name, email, message, timestamp 
     FROM messages 
     ORDER BY timestamp DESC 
     LIMIT 10
   `),
 
-    visitsByHour: db.prepare(`
+  visitsByHour: db.prepare(`
     SELECT strftime('%H', timestamp) as hour, COUNT(*) as count 
     FROM visitors 
     GROUP BY hour 
@@ -106,9 +113,10 @@ const getStats = {
 };
 
 module.exports = {
-    db,
-    addVisitor,
-    addMessage,
-    addDownload,
-    getStats
+  db,
+  addVisitor,
+  checkRecentVisit,
+  addMessage,
+  addDownload,
+  getStats
 };

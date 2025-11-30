@@ -4,7 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
-const { addVisitor, addMessage, addDownload, getStats } = require('./database');
+const { addVisitor, checkRecentVisit, addMessage, addDownload, getStats } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -150,6 +150,14 @@ app.post('/api/visitor', async (req, res) => {
       ipInfo = await getIPInfo(ip);
     } catch (error) {
       console.log('IP info lookup skipped:', error.message);
+    }
+
+    // Check if this IP visited in the last 30 minutes
+    const recentVisit = checkRecentVisit.get(ipInfo.ip);
+
+    if (recentVisit) {
+      console.log(`🔄 Recent visit found for IP ${ipInfo.ip}, skipping tracking.`);
+      return res.json({ success: true, location: ipInfo, skipped: true });
     }
 
     // Save to database
