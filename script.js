@@ -179,59 +179,82 @@ function initScrollAnimations() {
 
 // ===== PORTFOLIO CAROUSEL =====
 function initCarousel() {
-    let currentSlide = 0;
     const slides = document.querySelectorAll('.carousel-slide');
     const indicators = document.querySelectorAll('.indicator');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
-    const totalSlides = slides.length;
-    let autoPlayInterval;
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+    let autoPlayInterval = null;
+    let isTransitioning = false;
 
     // Show specific slide
     function showSlide(index) {
-        // Remove active class from all slides and indicators
-        slides.forEach(slide => slide.classList.remove('active'));
-        indicators.forEach(indicator => indicator.classList.remove('active'));
+        if (isTransitioning) return;
 
-        // Wrap around
-        if (index >= totalSlides) {
+        // Normalize index
+        if (index >= slides.length) {
             currentSlide = 0;
         } else if (index < 0) {
-            currentSlide = totalSlides - 1;
+            currentSlide = slides.length - 1;
         } else {
             currentSlide = index;
         }
 
-        // Add active class to current slide and indicator
-        slides[currentSlide].classList.add('active');
-        indicators[currentSlide].classList.add('active');
+        // Update slides
+        slides.forEach((slide, i) => {
+            slide.classList.remove('active');
+            if (i === currentSlide) {
+                slide.classList.add('active');
+            }
+        });
+
+        // Update indicators
+        indicators.forEach((indicator, i) => {
+            indicator.classList.remove('active');
+            if (i === currentSlide) {
+                indicator.classList.add('active');
+            }
+        });
+
+        // Prevent rapid clicking
+        isTransitioning = true;
+        setTimeout(() => {
+            isTransitioning = false;
+        }, 600);
     }
 
-    // Next slide
+    // Navigation functions
     function nextSlide() {
         showSlide(currentSlide + 1);
     }
 
-    // Previous slide
     function prevSlide() {
         showSlide(currentSlide - 1);
     }
 
-    // Auto play
+    // Auto-play management
     function startAutoPlay() {
-        autoPlayInterval = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        stopAutoPlay(); // Clear any existing interval
+        autoPlayInterval = setInterval(nextSlide, 5000);
     }
 
     function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+        }
     }
 
-    // Event listeners
+    // Button event listeners
     if (nextBtn) {
         nextBtn.addEventListener('click', () => {
             nextSlide();
             stopAutoPlay();
-            startAutoPlay(); // Restart auto-play
+            startAutoPlay();
         });
     }
 
@@ -252,58 +275,70 @@ function initCarousel() {
         });
     });
 
-    // Keyboard navigation
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    if (carouselContainer) {
+        carouselContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        carouselContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+                stopAutoPlay();
+                startAutoPlay();
+            }
+        }, { passive: true });
+
+        // Pause on hover
+        carouselContainer.addEventListener('mouseenter', stopAutoPlay);
+        carouselContainer.addEventListener('mouseleave', startAutoPlay);
+    }
+
+    // Keyboard navigation (only when carousel is in viewport)
+    let carouselInView = false;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            carouselInView = entry.isIntersecting;
+        });
+    }, { threshold: 0.5 });
+
+    if (carouselContainer) {
+        observer.observe(carouselContainer);
+    }
+
     document.addEventListener('keydown', (e) => {
+        if (!carouselInView) return;
+
         if (e.key === 'ArrowLeft') {
+            e.preventDefault();
             prevSlide();
             stopAutoPlay();
             startAutoPlay();
         } else if (e.key === 'ArrowRight') {
+            e.preventDefault();
             nextSlide();
             stopAutoPlay();
             startAutoPlay();
         }
     });
 
-    // Touch swipe support
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    const carouselContainer = document.querySelector('.carousel-container');
-    if (carouselContainer) {
-        carouselContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        carouselContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-    }
-
-    function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
-            // Swipe left
-            nextSlide();
-            stopAutoPlay();
-            startAutoPlay();
-        }
-        if (touchEndX > touchStartX + 50) {
-            // Swipe right
-            prevSlide();
-            stopAutoPlay();
-            startAutoPlay();
-        }
-    }
-
-    // Pause auto-play on hover
-    if (carouselContainer) {
-        carouselContainer.addEventListener('mouseenter', stopAutoPlay);
-        carouselContainer.addEventListener('mouseleave', startAutoPlay);
-    }
-
-    // Start auto-play
+    // Initialize
+    showSlide(0);
     startAutoPlay();
+
+    // Cleanup on page unload
+    window.addEventListener('beforeunload', stopAutoPlay);
 }
 
 // ===== CONTACT FORM =====
