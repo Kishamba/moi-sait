@@ -98,8 +98,8 @@ const translations = {
         portfolio_item4_desc: "High-profile corporate events, exhibitions, and brand activations with full technical support.",
         portfolio_item5_title: "Technical Infrastructure",
         portfolio_item5_desc: "Complex technical setups, rigging, automation systems, and equipment coordination.",
-        portfolio_item6_title: "Site Management",
-        portfolio_item6_desc: "On-site supervision, overlay management, and venue transformation for major sporting events.",
+        portfolio_item6_title: "Show Control",
+        portfolio_item6_desc: "The moment the lights rise above the stage, my job is to make sure everything backstage moves precisely, like the heart of a giant organism.",
 
         // Contact Section
         contact_heading: "Get In Touch",
@@ -218,8 +218,8 @@ const translations = {
         portfolio_item4_desc: "Престижные корпоративные мероприятия, выставки и брендовые активации с полной технической поддержкой.",
         portfolio_item5_title: "Техническая инфраструктура",
         portfolio_item5_desc: "Сложные технические установки, такелажные работы, системы автоматизации и координация оборудования.",
-        portfolio_item6_title: "Управление объектами",
-        portfolio_item6_desc: "Надзор на объекте, управление оверлеем и трансформация площадок для крупных спортивных мероприятий.",
+        portfolio_item6_title: "Контроль шоу",
+        portfolio_item6_desc: "В тот миг, когда свет поднимается над сценой, моя работа — сделать так, чтобы за кадром всё двигалось точно, как сердце огромного организма.",
 
         // Contact Section
         contact_heading: "Свяжитесь со мной",
@@ -338,8 +338,8 @@ const translations = {
         portfolio_item4_desc: "فعاليات مؤسسية رفيعة المستوى ومعارض وتفعيلات العلامات التجارية مع دعم تقني كامل.",
         portfolio_item5_title: "البنية التحتية التقنية",
         portfolio_item5_desc: "إعدادات تقنية معقدة وأنظمة التزوير والأتمتة وتنسيق المعدات.",
-        portfolio_item6_title: "إدارة الموقع",
-        portfolio_item6_desc: "الإشراف في الموقع وإدارة التراكب وتحويل الأماكن للأحداث الرياضية الكبرى.",
+        portfolio_item6_title: "التحكم في العرض",
+        portfolio_item6_desc: "في اللحظة التي ترتفع فيها الأضواء فوق المسرح، مهمتي هي التأكد من أن كل شيء خلف الكواليس يتحرك بدقة، مثل قلب كائن عملاق.",
 
         // Contact Section
         contact_heading: "تواصل معي",
@@ -458,8 +458,8 @@ const translations = {
         portfolio_item4_desc: "高规格企业活动、展览和品牌激活，提供全面技术支持。",
         portfolio_item5_title: "技术基础设施",
         portfolio_item5_desc: "复杂的技术设置、索具、自动化系统和设备协调。",
-        portfolio_item6_title: "现场管理",
-        portfolio_item6_desc: "现场监督、覆盖层管理和重大体育赛事的场馆改造。",
+        portfolio_item6_title: "演出控制",
+        portfolio_item6_desc: "当灯光在舞台上升起的那一刻，我的工作就是确保幕后的一切都精确移动，就像一个巨大有机体的心脏。",
 
         // Contact Section
         contact_heading: "联系我",
