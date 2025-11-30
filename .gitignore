@@ -5,3 +5,4 @@ node_modules/
 pptx_extract/
 .vscode/
 *.zip
+analytics.db

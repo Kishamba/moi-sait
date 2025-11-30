@@ -4,6 +4,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
+const { addVisitor, addMessage, addDownload, getStats } = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -78,7 +79,14 @@ bot.on('message', (msg) => {
   const text = msg.text;
 
   if (text === '📊 Статистика') {
-    bot.sendMessage(chatId, '📊 Статистика сайта будет доступна в следующей версии.');
+    const statsKeyboard = {
+      reply_markup: {
+        inline_keyboard: [
+          [{ text: '📊 Открыть статистику', web_app: { url: 'https://kishamba.com/stats' } }]
+        ]
+      }
+    };
+    bot.sendMessage(chatId, '📊 Нажмите кнопку ниже, чтобы открыть статистику:', statsKeyboard);
   } else if (text === '⚙️ Настройки') {
     const settingsKeyboard = {
       reply_markup: {
@@ -130,27 +138,30 @@ bot.on('callback_query', (query) => {
 // API: Track visitor
 app.post('/api/visitor', async (req, res) => {
   try {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
     const { language, userAgent } = req.body;
+    const referrer = req.headers.referer || req.headers.referrer || 'direct';
 
-    const ipInfo = await getIPInfo(ip);
+    let ipInfo = { ip: 'Unknown', city: 'Unknown', country: 'Unknown' };
 
-    const message = `👁 *Новый посетитель на сайте!*\n\n` +
-      `🌍 IP: \`${ipInfo.ip}\`\n` +
-      `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name}\n` +
-      `🗣 Язык: ${language}\n` +
-      `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
+    // Try to get IP info, but don't fail if rate limited
+    try {
+      ipInfo = await getIPInfo(ip);
+    } catch (error) {
+      console.log('IP info lookup skipped:', error.message);
+    }
 
-    const keyboard = {
-      reply_markup: {
-        inline_keyboard: [
-          [{ text: '🌐 Открыть сайт', callback_data: 'view_site' }],
-          [{ text: '📊 Статистика', callback_data: 'stats' }]
-        ]
-      }
-    };
+    // Save to database
+    addVisitor.run(
+      ipInfo.ip,
+      ipInfo.country_name || ipInfo.country || 'Unknown',
+      ipInfo.city || 'Unknown',
+      language || 'unknown',
+      referrer,
+      userAgent || 'unknown'
+    );
 
-    await bot.sendMessage(CHAT_ID, message, { parse_mode: 'Markdown', ...keyboard });
+    console.log(`📊 Visitor tracked: ${ipInfo.city}, ${ipInfo.country} (${language}) from ${referrer}`);
 
     res.json({ success: true, location: ipInfo });
   } catch (error) {
@@ -195,7 +206,6 @@ app.post('/api/download', async (req, res) => {
 app.post('/api/contact', async (req, res) => {
   try {
     console.log('📧 Contact form submission received');
-    console.log('Request body:', JSON.stringify(req.body, null, 2));
 
     const { name, email, message, language } = req.body;
 
@@ -205,9 +215,26 @@ app.post('/api/contact', async (req, res) => {
     }
 
     const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
-    console.log('IP address:', ip);
 
-    // Simple message without IP lookup to avoid rate limits
+    let ipInfo = { ip: 'Unknown', city: 'Unknown', country: 'Unknown' };
+    try {
+      ipInfo = await getIPInfo(ip);
+    } catch (error) {
+      console.log('IP info lookup skipped:', error.message);
+    }
+
+    // Save to database
+    addMessage.run(
+      name,
+      email,
+      message,
+      ipInfo.ip,
+      ipInfo.country_name || ipInfo.country || 'Unknown',
+      ipInfo.city || 'Unknown',
+      language || 'unknown'
+    );
+
+    // Send Telegram notification
     const telegramMessage = `💬 *Новое сообщение с сайта!*\n\n` +
       `👤 Имя: ${name}\n` +
       `📧 Email: ${email}\n` +
@@ -215,25 +242,46 @@ app.post('/api/contact', async (req, res) => {
       `🗣 Язык: ${language || 'unknown'}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU')}`;
 
-    console.log('Attempting to send Telegram message...');
-    console.log('CHAT_ID:', CHAT_ID);
-    console.log('Bot exists:', !!bot);
-
     try {
       await bot.sendMessage(CHAT_ID, telegramMessage, { parse_mode: 'Markdown' });
       console.log('✅ Telegram message sent successfully');
     } catch (botError) {
       console.error('❌ Telegram Bot Error:', botError.message);
-      console.error('Full error:', JSON.stringify(botError, null, 2));
       // Don't fail the request if just the bot fails
     }
 
     res.json({ success: true });
   } catch (error) {
     console.error('❌ Error in contact handler:', error.message);
-    console.error('Stack:', error.stack);
     res.status(500).json({ success: false, error: error.message });
   }
+});
+
+// API: Get statistics
+app.get('/api/stats', (req, res) => {
+  try {
+    const stats = {
+      totalVisitors: getStats.totalVisitors.get().count,
+      uniqueVisitors: getStats.uniqueVisitors.get().count,
+      totalMessages: getStats.totalMessages.get().count,
+      totalDownloads: getStats.totalDownloads.get().count,
+      topCountries: getStats.topCountries.all(),
+      topReferrers: getStats.topReferrers.all(),
+      visitsByDay: getStats.visitsByDay.all(),
+      recentMessages: getStats.recentMessages.all(),
+      visitsByHour: getStats.visitsByHour.all()
+    };
+
+    res.json({ success: true, stats });
+  } catch (error) {
+    console.error('Error getting stats:', error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+// Serve stats page
+app.get('/stats', (req, res) => {
+  res.sendFile(path.join(__dirname, 'stats.html'));
 });
 
 // Serve index.html
