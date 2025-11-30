@@ -138,7 +138,8 @@ bot.on('callback_query', (query) => {
 // API: Track visitor
 app.post('/api/visitor', async (req, res) => {
   try {
-    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress || 'Unknown';
+    if (ip.includes(',')) ip = ip.split(',')[0].trim();
     const { language, userAgent } = req.body;
     const referrer = req.headers.referer || req.headers.referrer || 'direct';
 

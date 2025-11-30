@@ -404,7 +404,13 @@ function initWhatsApp() {
 }
 
 // ===== VISITOR TRACKING =====
+// ===== VISITOR TRACKING =====
 async function trackVisitor() {
+    // Check if already tracked in this session
+    if (sessionStorage.getItem('visitorTracked')) {
+        return;
+    }
+
     try {
         const visitorData = {
             language: currentLang,
@@ -412,13 +418,17 @@ async function trackVisitor() {
             timestamp: new Date().toISOString()
         };
 
-        await fetch(`${API_BASE}/visitor`, {
+        const response = await fetch(`${API_BASE}/visitor`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(visitorData)
         });
+
+        if (response.ok) {
+            sessionStorage.setItem('visitorTracked', 'true');
+        }
     } catch (error) {
         console.error('Error tracking visitor:', error);
     }
