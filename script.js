@@ -119,7 +119,8 @@ function initNavigation() {
             const targetSection = document.querySelector(targetId);
 
             if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 70;
+                const headerHeight = document.querySelector('.navbar').offsetHeight;
+                const offsetTop = targetSection.offsetTop - headerHeight;
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'

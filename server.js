@@ -4,7 +4,10 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 const cors = require('cors');
 const path = require('path');
-const { addVisitor, checkRecentVisit, addMessage, addDownload, getStats } = require('./database');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const basicAuth = require('express-basic-auth');
+const db = require('./database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -29,9 +32,26 @@ if (token) {
 const CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 // Middleware
+app.use(helmet({
+  contentSecurityPolicy: false, // Disabled for simplicity with external scripts (Telegram, Charts)
+}));
 app.use(cors());
 app.use(express.json());
 app.use(express.static(__dirname));
+
+// Rate Limiter for Contact Form
+const contactLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 5, // Limit each IP to 5 requests per windowMs
+  message: { success: false, error: 'Too many requests, please try again later.' }
+});
+
+// Basic Auth for Stats
+const auth = basicAuth({
+  users: { 'admin': process.env.ADMIN_PASSWORD || 'admin123' },
+  challenge: true,
+  realm: 'Kishamba Stats'
+});
 
 // Get IP geolocation
 async function getIPInfo(ip) {
@@ -153,7 +173,7 @@ app.post('/api/visitor', async (req, res) => {
     }
 
     // Check if this IP visited in the last 30 minutes
-    const recentVisit = checkRecentVisit.get(ipInfo.ip);
+    const recentVisit = await db.checkRecentVisit(ipInfo.ip);
 
     if (recentVisit) {
       console.log(`🔄 Recent visit found for IP ${ipInfo.ip}, skipping tracking.`);
@@ -161,7 +181,7 @@ app.post('/api/visitor', async (req, res) => {
     }
 
     // Save to database
-    addVisitor.run(
+    await db.addVisitor(
       ipInfo.ip,
       ipInfo.country_name || ipInfo.country || 'Unknown',
       ipInfo.city || 'Unknown',
@@ -202,6 +222,14 @@ app.post('/api/download', async (req, res) => {
       }
     };
 
+    // Save to database
+    await db.addDownload(
+      ipInfo.ip,
+      ipInfo.country_name || ipInfo.country || 'Unknown',
+      ipInfo.city || 'Unknown',
+      language || 'unknown'
+    );
+
     await bot.sendMessage(CHAT_ID, message, { parse_mode: 'Markdown', ...keyboard });
 
     res.json({ success: true });
@@ -212,7 +240,7 @@ app.post('/api/download', async (req, res) => {
 });
 
 // API: Contact form submission
-app.post('/api/contact', async (req, res) => {
+app.post('/api/contact', contactLimiter, async (req, res) => {
   try {
     console.log('📧 Contact form submission received');
 
@@ -233,7 +261,7 @@ app.post('/api/contact', async (req, res) => {
     }
 
     // Save to database
-    addMessage.run(
+    await db.addMessage(
       name,
       email,
       message,
@@ -267,18 +295,19 @@ app.post('/api/contact', async (req, res) => {
 });
 
 // API: Get statistics
-app.get('/api/stats', (req, res) => {
+app.get('/api/stats', auth, async (req, res) => {
   try {
+    const data = await db.getStats();
     const stats = {
-      totalVisitors: getStats.totalVisitors.get().count,
-      uniqueVisitors: getStats.uniqueVisitors.get().count,
-      totalMessages: getStats.totalMessages.get().count,
-      totalDownloads: getStats.totalDownloads.get().count,
-      topCountries: getStats.topCountries.all(),
-      topReferrers: getStats.topReferrers.all(),
-      visitsByDay: getStats.visitsByDay.all(),
-      recentMessages: getStats.recentMessages.all(),
-      visitsByHour: getStats.visitsByHour.all()
+      totalVisitors: data.totalVisitors.count,
+      uniqueVisitors: data.uniqueVisitors.count,
+      totalMessages: data.totalMessages.count,
+      totalDownloads: data.totalDownloads.count,
+      topCountries: data.topCountries,
+      topReferrers: data.topReferrers,
+      visitsByDay: data.visitsByDay,
+      recentMessages: data.recentMessages,
+      visitsByHour: data.visitsByHour
     };
 
     res.json({ success: true, stats });
@@ -289,7 +318,7 @@ app.get('/api/stats', (req, res) => {
 });
 
 // Serve stats page
-app.get('/stats', (req, res) => {
+app.get('/stats', auth, (req, res) => {
   res.sendFile(path.join(__dirname, 'stats.html'));
 });
 

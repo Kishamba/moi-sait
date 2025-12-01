@@ -141,6 +141,10 @@ body.rtl {
     gap: 8px;
 }
 
+.mobile-lang-switcher {
+    display: none;
+}
+
 .lang-btn {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
@@ -1123,7 +1127,7 @@ section {
 @media (max-width: 968px) {
     .nav-menu {
         position: fixed;
-        top: 70px;
+        top: 51px;
         left: -100%;
         flex-direction: column;
         background: rgba(10, 14, 39, 0.98);
@@ -1133,6 +1137,28 @@ section {
         gap: 20px;
         transition: var(--transition-normal);
         box-shadow: var(--shadow-lg);
+    }
+
+    .nav-right .language-switcher {
+        display: none;
+    }
+
+    .mobile-lang-switcher {
+        display: block;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .mobile-lang-switcher .language-switcher {
+        justify-content: center;
+    }
+
+    .nav-container {
+        padding: 10px 15px;
+    }
+
+    .logo-text {
+        height: 30px;
     }
 
     .nav-menu.active {
