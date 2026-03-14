@@ -33,8 +33,17 @@
     <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
     <link rel="shortcut icon" href="images/logo.png">
 
-    <link rel="stylesheet" href="styles.css?v=1.1">
+    <link rel="stylesheet" href="styles.css?v=1.2">
     <link rel="canonical" href="https://kishamba.com/">
+
+    <!-- Google Analytics 4 — замените G-XXXXXXXXXX на ваш реальный Measurement ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -132,6 +141,86 @@
         </div>
     </section>
 
+    <!-- Trusted By Section — 3 бегущие ленты -->
+    <section class="trusted-by" id="trusted">
+        <p class="trusted-by-label" data-i18n="trusted_label">Trusted By</p>
+
+        <!--
+            КАК ДОБАВИТЬ ЛОГОТИПЫ:
+            1. Создай папку images/logos/
+            2. Положи туда PNG/SVG логотипы (прозрачный фон, желательно белый или серый цвет)
+            3. В каждой .logos-track замени logo-placeholder-divы на:
+               <div class="logo-item"><img src="images/logos/название.png" alt="Название компании"></div>
+            4. Логотипы в ленте дублируются (копируй каждый item дважды) — это нужно для бесконечной прокрутки
+
+            Лента 1 — движение вправо
+        -->
+        <div class="logos-strip strip-right">
+            <div class="logos-track">
+                <!-- === ЛЕНТА 1: сюда 13-14 логотипов + их копии === -->
+                <div class="logo-item logo-placeholder"><span>FIFA WC 2022</span></div>
+                <div class="logo-item logo-placeholder"><span>FIFA WC 2018</span></div>
+                <div class="logo-item logo-placeholder"><span>Olympic Sochi 2014</span></div>
+                <div class="logo-item logo-placeholder"><span>Cirque du Soleil</span></div>
+                <div class="logo-item logo-placeholder"><span>MTV</span></div>
+                <div class="logo-item logo-placeholder"><span>Tashir Arena</span></div>
+                <div class="logo-item logo-placeholder"><span>Röder</span></div>
+                <!-- дублируй логотипы ниже для бесконечной прокрутки -->
+                <div class="logo-item logo-placeholder"><span>FIFA WC 2022</span></div>
+                <div class="logo-item logo-placeholder"><span>FIFA WC 2018</span></div>
+                <div class="logo-item logo-placeholder"><span>Olympic Sochi 2014</span></div>
+                <div class="logo-item logo-placeholder"><span>Cirque du Soleil</span></div>
+                <div class="logo-item logo-placeholder"><span>MTV</span></div>
+                <div class="logo-item logo-placeholder"><span>Tashir Arena</span></div>
+                <div class="logo-item logo-placeholder"><span>Röder</span></div>
+            </div>
+        </div>
+
+        <!-- Лента 2 — движение влево -->
+        <div class="logos-strip strip-left">
+            <div class="logos-track">
+                <!-- === ЛЕНТА 2: сюда 13-14 логотипов + их копии === -->
+                <div class="logo-item logo-placeholder"><span>United for Manpower</span></div>
+                <div class="logo-item logo-placeholder"><span>StageHand Production</span></div>
+                <div class="logo-item logo-placeholder"><span>MF Group</span></div>
+                <div class="logo-item logo-placeholder"><span>Vivat Group</span></div>
+                <div class="logo-item logo-placeholder"><span>Cometa Production</span></div>
+                <div class="logo-item logo-placeholder"><span>Spin Music Service</span></div>
+                <div class="logo-item logo-placeholder"><span>Abd Entertainment</span></div>
+                <!-- дублируй -->
+                <div class="logo-item logo-placeholder"><span>United for Manpower</span></div>
+                <div class="logo-item logo-placeholder"><span>StageHand Production</span></div>
+                <div class="logo-item logo-placeholder"><span>MF Group</span></div>
+                <div class="logo-item logo-placeholder"><span>Vivat Group</span></div>
+                <div class="logo-item logo-placeholder"><span>Cometa Production</span></div>
+                <div class="logo-item logo-placeholder"><span>Spin Music Service</span></div>
+                <div class="logo-item logo-placeholder"><span>Abd Entertainment</span></div>
+            </div>
+        </div>
+
+        <!-- Лента 3 — движение вправо (медленнее) -->
+        <div class="logos-strip strip-right strip-slow">
+            <div class="logos-track">
+                <!-- === ЛЕНТА 3: сюда оставшиеся 13-14 логотипов + их копии === -->
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 1</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 2</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 3</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 4</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 5</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 6</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 7</span></div>
+                <!-- дублируй -->
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 1</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 2</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 3</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 4</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 5</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 6</span></div>
+                <div class="logo-item logo-placeholder"><span>Артист / Компания 7</span></div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section class="about" id="about">
         <div class="container">
@@ -173,6 +262,65 @@
                             <i class="fas fa-users"></i>
                         </div>
                         <h3 data-i18n="about_achievement4">International Team Leadership</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Event Workforce Section -->
+    <section class="workforce" id="workforce">
+        <div class="container">
+            <h2 class="section-title" data-i18n="workforce_heading">International Event Workforce</h2>
+
+            <div class="workforce-inner">
+                <div class="workforce-text-col">
+                    <p class="workforce-intro" data-i18n="workforce_intro">
+                        Over the years I have organised and deployed professional installation teams for major
+                        international events, exhibitions and touring productions.
+                    </p>
+
+                    <div class="workforce-teams">
+                        <h3 data-i18n="workforce_teams_title">Available teams include:</h3>
+                        <ul class="workforce-list">
+                            <li><i class="fas fa-chevron-right"></i><span data-i18n="workforce_item1">Scenic installation crews</span></li>
+                            <li><i class="fas fa-chevron-right"></i><span data-i18n="workforce_item2">Stage and rigging technicians</span></li>
+                            <li><i class="fas fa-chevron-right"></i><span data-i18n="workforce_item3">Pavilion construction teams</span></li>
+                            <li><i class="fas fa-chevron-right"></i><span data-i18n="workforce_item4">Venue overlay installation crews</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="workforce-details">
+                        <p data-i18n="workforce_detail1">Teams consist of experienced technicians and supervisors with international event experience.</p>
+                        <p data-i18n="workforce_detail2">Installation crews and technical teams available for international projects across Europe, Middle East and Asia.</p>
+                    </div>
+                </div>
+
+                <div class="workforce-stats-col">
+                    <div class="workforce-stat">
+                        <div class="workforce-stat-number">5 – 100<span>+</span></div>
+                        <div class="workforce-stat-label" data-i18n="workforce_stat_label">Technicians per project</div>
+                    </div>
+                    <div class="workforce-icons-grid">
+                        <div class="workforce-icon-item">
+                            <i class="fas fa-hard-hat"></i>
+                            <span data-i18n="workforce_item1">Scenic installation crews</span>
+                        </div>
+                        <div class="workforce-icon-item">
+                            <i class="fas fa-tools"></i>
+                            <span data-i18n="workforce_item2">Stage and rigging technicians</span>
+                        </div>
+                        <div class="workforce-icon-item">
+                            <i class="fas fa-warehouse"></i>
+                            <span data-i18n="workforce_item3">Pavilion construction teams</span>
+                        </div>
+                        <div class="workforce-icon-item">
+                            <i class="fas fa-layer-group"></i>
+                            <span data-i18n="workforce_item4">Venue overlay installation</span>
+                        </div>
+                    </div>
+                    <div class="workforce-regions">
+                        <p data-i18n="workforce_regions">Europe &nbsp;·&nbsp; Middle East &nbsp;·&nbsp; Asia</p>
                     </div>
                 </div>
             </div>
@@ -374,8 +522,7 @@
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
         <div class="container">
-            <h2 class="section-title" data-i18n="portfolio_heading">Portfolio</h2>
-            <p class="section-subtitle" data-i18n="portfolio_subtitle">Major Events & Productions</p>
+            <h2 class="section-title" data-i18n="portfolio_heading">Major Event Experience</h2>
 
             <div class="portfolio-carousel">
                 <div class="carousel-container">
@@ -470,6 +617,29 @@
         </div>
     </section>
 
+    <!-- Availability Section -->
+    <section class="availability" id="availability">
+        <div class="container">
+            <h2 class="section-title" data-i18n="avail_title">Availability</h2>
+            <div class="avail-inner">
+                <div class="avail-status-block">
+                    <div class="avail-dot"></div>
+                    <p data-i18n="avail_status">Available for international projects from August 2026</p>
+                    <p class="avail-location"><i class="fas fa-map-marker-alt"></i> <span data-i18n="avail_location">Currently based in Yerevan, Armenia</span></p>
+                </div>
+                <div class="avail-regions">
+                    <h3 data-i18n="avail_regions_title">Open to projects in:</h3>
+                    <ul>
+                        <li><span class="region-flag">🌙</span> <strong data-i18n="avail_r1_h">Middle East</strong> — <span data-i18n="avail_r1_p">Qatar, UAE, Saudi Arabia, Bahrain</span></li>
+                        <li><span class="region-flag">🌍</span> <strong data-i18n="avail_r2_h">Europe</strong> — <span data-i18n="avail_r2_p">All European markets</span></li>
+                        <li><span class="region-flag">🌏</span> <strong data-i18n="avail_r3_h">Asia</strong> — <span data-i18n="avail_r3_p">China, Japan, South Korea and wider region</span></li>
+                        <li><span class="region-flag">🌎</span> <strong data-i18n="avail_r4_h">Americas</strong> — <span data-i18n="avail_r4_p">North America &amp; South America</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
         <div class="container">
@@ -518,7 +688,7 @@
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h4>Location</h4>
-                                <p>Moscow, Russia</p>
+                                <p>Yerevan, Armenia</p>
                             </div>
                         </div>
 
@@ -561,6 +731,28 @@
 
     <!-- Success/Error Message -->
     <div class="toast" id="toast"></div>
+
+    <!-- Telegram Popup (появляется через 30 сек) -->
+    <div class="tg-popup" id="tgPopup">
+        <button class="tg-popup-close" id="tgPopupClose" aria-label="Close">×</button>
+        <div class="tg-popup-header">
+            <div class="tg-popup-avatar">
+                <img src="images/MYs.jpg" alt="Aleksey Lazarev">
+            </div>
+            <div class="tg-popup-meta">
+                <strong>Aleksey Lazarev</strong>
+                <span class="tg-popup-online">
+                    <span class="tg-dot"></span>
+                    <span data-i18n="tg_online">Online</span>
+                </span>
+            </div>
+        </div>
+        <p class="tg-popup-text" data-i18n="tg_message">Hi! I'm currently online. Feel free to message me on Telegram about your project.</p>
+        <a href="https://t.me/Kishamba" target="_blank" rel="noopener" class="tg-popup-btn">
+            <i class="fab fa-telegram"></i>
+            <span data-i18n="tg_btn">Write on Telegram</span>
+        </a>
+    </div>
 
     <script src="translations.js"></script>
     <script src="script.js"></script>

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initCarousel();
     initContactForm();
     initResumeDownload();
+    initTelegramPopup();
 
     trackVisitor();
 });
@@ -480,3 +481,25 @@ window.addEventListener('scroll', debounce(() => {
         }
     }
 }, 100));
+
+// ===== TELEGRAM POPUP =====
+function initTelegramPopup() {
+    const popup = document.getElementById('tgPopup');
+    const closeBtn = document.getElementById('tgPopupClose');
+    if (!popup) return;
+
+    // Показываем один раз за сессию, через 30 секунд
+    if (sessionStorage.getItem('tgPopupShown')) return;
+
+    setTimeout(() => {
+        popup.classList.add('visible');
+        sessionStorage.setItem('tgPopupShown', '1');
+    }, 30000);
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => popup.classList.remove('visible'));
+    }
+
+    // Автоматически скрываем через 20 секунд после появления
+    setTimeout(() => popup.classList.remove('visible'), 55000);
+}

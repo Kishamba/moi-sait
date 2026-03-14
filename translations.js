@@ -85,9 +85,21 @@ const translations = {
         exp10_period: "Moscow, Russia",
         exp10_desc: "Managed event logistics and technical requirements for corporate events, concerts, and entertainment productions.",
 
+        // Workforce Section
+        workforce_heading: "International Event Workforce",
+        workforce_intro: "Over the years I have organised and deployed professional installation teams for major international events, exhibitions and touring productions.",
+        workforce_teams_title: "Available teams include:",
+        workforce_item1: "Scenic installation crews",
+        workforce_item2: "Stage and rigging technicians",
+        workforce_item3: "Pavilion construction teams",
+        workforce_item4: "Venue overlay installation crews",
+        workforce_detail1: "Teams consist of experienced technicians and supervisors with international event experience.",
+        workforce_detail2: "Installation crews and technical teams available for international projects across Europe, Middle East and Asia.",
+        workforce_stat_label: "Technicians per project",
+        workforce_regions: "Europe · Middle East · Asia",
+
         // Portfolio Section
-        portfolio_heading: "Portfolio",
-        portfolio_subtitle: "Major Events & Productions",
+        portfolio_heading: "Major Event Experience",
         portfolio_item1_title: "Concert Production",
         portfolio_item1_desc: "Large-scale concert technical management and stage production for major artists and festivals.",
         portfolio_item2_title: "Cinema & Film Events",
@@ -115,6 +127,28 @@ const translations = {
         footer_text: "Professional Event Management & Technical Production Services",
         footer_rights: "All rights reserved",
 
+        // Trusted By
+        trusted_label: "Trusted By",
+
+        // Availability
+        avail_title: "Availability",
+        avail_status: "Available for international projects from August 2026",
+        avail_location: "Currently based in Yerevan, Armenia",
+        avail_regions_title: "Open to projects in:",
+        avail_r1_h: "Middle East",
+        avail_r1_p: "Qatar, UAE, Saudi Arabia, Bahrain",
+        avail_r2_h: "Europe",
+        avail_r2_p: "All European markets",
+        avail_r3_h: "Asia",
+        avail_r3_p: "China, Japan, South Korea and wider region",
+        avail_r4_h: "Americas",
+        avail_r4_p: "North America & South America",
+
+        // Telegram Popup
+        tg_online: "Online",
+        tg_message: "Hi! I'm currently online. Feel free to message me on Telegram about your project.",
+        tg_btn: "Write on Telegram",
+
         // WhatsApp
         whatsapp_message: "Hello! I'm interested in your services.",
     },
@@ -131,14 +165,14 @@ const translations = {
         // Hero Section
         hero_greeting: "Привет, я",
         hero_name: "Алексей Лазарев",
-        hero_title: "Технический менеджер | Оверлей менеджер | Командный игрок и Лидер",
+        hero_title: "Технический менеджер | Менеджер временной инфраструктуры | Лидер команды",
         hero_subtitle: "Предоставляю услуги мирового уровня в области производства мероприятий и технического менеджмента по всему миру",
         hero_cta: "Связаться",
         hero_download: "Скачать резюме",
 
         // About Section
         about_heading: "Обо мне",
-        about_text: "Профессионал с опытом работы более 17 лет в области производства мероприятий, технического менеджмента и управления международными командами. Специализируюсь на крупномасштабных мероприятиях, включая Чемпионат мира по футболу, Олимпийские игры и постановки Cirque du Soleil. Эксперт в области оверлей-менеджмента, надзора за объектами и координации межкультурных команд.",
+        about_text: "Профессионал с опытом работы более 17 лет в области производства мероприятий, технического менеджмента и управления международными командами. Специализируюсь на крупномасштабных мероприятиях, включая Чемпионат мира по футболу, Олимпийские игры и постановки Cirque du Soleil. Эксперт в области управления временной инфраструктурой, надзора за объектами и координации межкультурных команд.",
         about_achievement1: "17+ лет опыта",
         about_achievement2: "ЧМ по футболу 2018 и 2022",
         about_achievement3: "Олимпиада Сочи 2014",
@@ -148,8 +182,8 @@ const translations = {
         services_heading: "Мои услуги",
         service1_title: "Технический менеджмент",
         service1_desc: "Комплексный технический надзор за крупномасштабными мероприятиями, включая планирование оборудования, координацию персонала и надзор на объекте. Обеспечение безупречного выполнения от монтажа до демонтажа.",
-        service2_title: "Оверлей и управление объектами",
-        service2_desc: "Экспертное управление оверлеем для крупных спортивных мероприятий и выставок. Специализация на стандартах FIFA, трансформации площадок и координации временной инфраструктуры.",
+        service2_title: "Временная инфраструктура и управление объектами",
+        service2_desc: "Управление временной инфраструктурой для крупных спортивных мероприятий и выставок. Специализация на международных стандартах, трансформации площадок и координации временных сооружений.",
         service3_title: "Управление международными командами",
         service3_desc: "Формирование и управление мультикультурными командами от 20 до 500+ специалистов. Опыт в трансграничной логистике, размещении, транспорте и многоязычной координации.",
 
@@ -161,9 +195,9 @@ const translations = {
         exp1_desc: "Руководство техническими операциями для крупных арена-мероприятий, управление оборудованием, координация персонала.",
 
         exp2_company: "United for Manpower Solutions",
-        exp2_role: "Супервайзер, Оверлей менеджер",
+        exp2_role: "Супервайзер, Менеджер временной инфраструктуры",
         exp2_period: "Доха, Катар",
-        exp2_desc: "Управление международными командами на ЧМ по футболу 2022, надзор за установкой оверлея и трансформацией стадионов.",
+        exp2_desc: "Управление международными командами на ЧМ по футболу 2022, надзор за монтажом временной инфраструктуры и трансформацией стадионов.",
 
         exp3_company: "Röder Россия",
         exp3_role: "Технический менеджер",
@@ -205,9 +239,21 @@ const translations = {
         exp10_period: "Москва, Россия",
         exp10_desc: "Управление логистикой и техническими требованиями для корпоративных мероприятий, концертов и развлечений.",
 
+        // Workforce Section
+        workforce_heading: "Международные монтажные команды",
+        workforce_intro: "На протяжении многих лет я организовывал и формировал профессиональные монтажные команды для крупных международных мероприятий, выставок и гастрольных постановок.",
+        workforce_teams_title: "Доступные команды:",
+        workforce_item1: "Бригады по монтажу декораций",
+        workforce_item2: "Техники сцены и такелажники",
+        workforce_item3: "Команды по строительству павильонов",
+        workforce_item4: "Монтажные бригады по временной инфраструктуре площадок",
+        workforce_detail1: "Команды состоят из опытных технических специалистов и супервайзеров с опытом работы на международных мероприятиях.",
+        workforce_detail2: "Монтажные бригады и технические команды доступны для международных проектов в Европе, на Ближнем Востоке и в Азии.",
+        workforce_stat_label: "Техников на проект",
+        workforce_regions: "Европа · Ближний Восток · Азия",
+
         // Portfolio Section
-        portfolio_heading: "Портфолио",
-        portfolio_subtitle: "Крупные мероприятия и проекты",
+        portfolio_heading: "Крупные международные проекты",
         portfolio_item1_title: "Концертное производство",
         portfolio_item1_desc: "Крупномасштабный технический менеджмент концертов и сценическое производство для ведущих артистов и фестивалей.",
         portfolio_item2_title: "Кино и киномероприятия",
@@ -235,6 +281,28 @@ const translations = {
         footer_text: "Профессиональные услуги по управлению мероприятиями и техническому производству",
         footer_rights: "Все права защищены",
 
+        // Trusted By
+        trusted_label: "Нам доверяют",
+
+        // Availability
+        avail_title: "Доступность",
+        avail_status: "Доступен для международных проектов с августа 2026",
+        avail_location: "В настоящее время нахожусь в Ереване, Армения",
+        avail_regions_title: "Открыт для проектов в:",
+        avail_r1_h: "Ближний Восток",
+        avail_r1_p: "Катар, ОАЭ, Саудовская Аравия, Бахрейн",
+        avail_r2_h: "Европа",
+        avail_r2_p: "Все европейские рынки",
+        avail_r3_h: "Азия",
+        avail_r3_p: "Китай, Япония, Южная Корея и регион в целом",
+        avail_r4_h: "Америка",
+        avail_r4_p: "Северная Америка и Южная Америка",
+
+        // Telegram Popup
+        tg_online: "Онлайн",
+        tg_message: "Привет! Я сейчас онлайн. Напишите мне в Telegram по поводу вашего проекта.",
+        tg_btn: "Написать в Telegram",
+
         // WhatsApp
         whatsapp_message: "Здравствуйте! Меня интересуют ваши услуги.",
     },
@@ -251,14 +319,14 @@ const translations = {
         // Hero Section
         hero_greeting: "مرحباً، أنا",
         hero_name: "أليكسي لازاريف",
-        hero_title: "مدير تقني | مدير التراكب | لاعب فريق وباني فرق",
+        hero_title: "مدير تقني | مدير البنية التحتية المؤقتة | قائد فريق",
         hero_subtitle: "تقديم خدمات إنتاج الفعاليات والإدارة التقنية على مستوى عالمي",
         hero_cta: "تواصل معي",
         hero_download: "تحميل السيرة الذاتية",
 
         // About Section
         about_heading: "عني",
-        about_text: "محترف يتمتع بخبرة تزيد عن 17 عامًا في إنتاج الفعاليات والإدارة التقنية وقيادة الفرق الدولية. متخصص في الفعاليات واسعة النطاق بما في ذلك كأس العالم FIFA والألعاب الأولمبية وإنتاجات Cirque du Soleil. خبير في إدارة التراكب والإشراف على المواقع وتنسيق الفرق متعددة الثقافات.",
+        about_text: "محترف يتمتع بخبرة تزيد عن 17 عامًا في إنتاج الفعاليات والإدارة التقنية وقيادة الفرق الدولية. متخصص في الفعاليات واسعة النطاق بما في ذلك كأس العالم لكرة القدم والألعاب الأولمبية وعروض سيرك دو سوليل. خبير في إدارة البنية التحتية المؤقتة والإشراف على المواقع وتنسيق الفرق متعددة الثقافات.",
         about_achievement1: "أكثر من 17 عامًا من الخبرة",
         about_achievement2: "كأس العالم 2018 و 2022",
         about_achievement3: "أولمبياد سوتشي 2014",
@@ -268,8 +336,8 @@ const translations = {
         services_heading: "خدماتي",
         service1_title: "الإدارة التقنية",
         service1_desc: "إشراف تقني شامل للفعاليات واسعة النطاق، بما في ذلك تخطيط المعدات وتنسيق الموظفين والإشراف في الموقع. ضمان التنفيذ السلس من التركيب إلى التفكيك.",
-        service2_title: "إدارة التراكب والموقع",
-        service2_desc: "إدارة خبيرة للتراكب للأحداث الرياضية الكبرى والمعارض. متخصص في معايير FIFA وتحويل الأماكن وتنسيق البنية التحتية المؤقتة.",
+        service2_title: "إدارة البنية التحتية المؤقتة والمواقع",
+        service2_desc: "إدارة البنية التحتية المؤقتة للأحداث الرياضية الكبرى والمعارض. متخصص في معايير الفعاليات الدولية وتحويل الأماكن وتنسيق المنشآت المؤقتة.",
         service3_title: "قيادة الفريق الدولي",
         service3_desc: "بناء وإدارة فرق متعددة الثقافات من 20 إلى 500+ محترف. خبرة في اللوجستيات عبر الحدود والإقامة والنقل والتنسيق متعدد اللغات.",
 
@@ -281,21 +349,21 @@ const translations = {
         exp1_desc: "قيادة العمليات التقنية لفعاليات الأرينا الكبرى، إدارة المعدات وتنسيق الموظفين.",
 
         exp2_company: "United for Manpower Solutions",
-        exp2_role: "مشرف، مدير التراكب",
+        exp2_role: "مشرف، مدير البنية التحتية المؤقتة",
         exp2_period: "الدوحة، قطر",
-        exp2_desc: "إدارة الفرق الدولية لكأس العالم 2022، الإشراف على تركيبات التراكب وتحويل الملاعب.",
+        exp2_desc: "إدارة الفرق الدولية لكأس العالم 2022، الإشراف على تركيبات البنية التحتية المؤقتة وتحويل الملاعب.",
 
         exp3_company: "رودر روسيا",
         exp3_role: "مدير تقني",
         exp3_period: "موسكو وقطر | يناير 2023 – ديسمبر 2023",
         exp3_desc: "تنسيق العمليات التقنية لمعرض روسيا القرن 21 في موسكو ومعرض أجروإكسبو 2023 في قطر.",
 
-        exp4_company: "StageHand Production",
+        exp4_company: "ستيج هاند بروداكشن",
         exp4_role: "المدير العام",
         exp4_period: "موسكو، روسيا | أبريل 2016 – سبتمبر 2019",
-        exp4_desc: "تأسيس وإدارة شركة إنتاج الفعاليات، تقديم خدمات لكأس العالم 2018 والحفلات الكبرى.",
+        exp4_desc: "تأسيس وإدارة شركة إنتاج الفعاليات، تقديم خدمات لكأس العالم 2018 لكرة القدم والحفلات الكبرى.",
 
-        exp5_company: "Cirque Du Soleil, 45 Degrees",
+        exp5_company: "سيرك دو سوليل، 45 درجة",
         exp5_role: "فني أتمتة المسرح، مستقل، رئيس عمال",
         exp5_period: "موسكو، روسيا | ديسمبر 2010 – يناير 2016",
         exp5_desc: "التخصص في أنظمة المسرح الآلية، معالجة الدعائم والإشراف على الطاقم للعروض الجولات.",
@@ -325,9 +393,21 @@ const translations = {
         exp10_period: "موسكو، روسيا",
         exp10_desc: "إدارة اللوجستيات والمتطلبات التقنية للفعاليات المؤسسية والحفلات والترفيه.",
 
+        // Workforce Section
+        workforce_heading: "فرق العمل الدولية للفعاليات",
+        workforce_intro: "على مدار السنوات، قمت بتنظيم ونشر فرق تركيب احترافية للفعاليات الدولية الكبرى والمعارض والعروض الجولات.",
+        workforce_teams_title: "الفرق المتاحة:",
+        workforce_item1: "طواقم تركيب الديكور",
+        workforce_item2: "فنيو المسرح والتعليق",
+        workforce_item3: "فرق بناء الأجنحة",
+        workforce_item4: "فرق تركيب البنية التحتية المؤقتة للمواقع",
+        workforce_detail1: "تتكون الفرق من فنيين ومشرفين ذوي خبرة في الفعاليات الدولية.",
+        workforce_detail2: "فرق التركيب والطواقم التقنية متاحة للمشاريع الدولية في أوروبا والشرق الأوسط وآسيا.",
+        workforce_stat_label: "فني لكل مشروع",
+        workforce_regions: "أوروبا · الشرق الأوسط · آسيا",
+
         // Portfolio Section
-        portfolio_heading: "المعرض",
-        portfolio_subtitle: "الفعاليات والإنتاجات الكبرى",
+        portfolio_heading: "خبرة الفعاليات الدولية الكبرى",
         portfolio_item1_title: "إنتاج الحفلات الموسيقية",
         portfolio_item1_desc: "إدارة تقنية واسعة النطاق للحفلات الموسيقية وإنتاج المسرح للفنانين والمهرجانات الكبرى.",
         portfolio_item2_title: "فعاليات السينما والأفلام",
@@ -355,6 +435,28 @@ const translations = {
         footer_text: "خدمات إدارة الفعاليات والإنتاج التقني الاحترافية",
         footer_rights: "جميع الحقوق محفوظة",
 
+        // Trusted By
+        trusted_label: "يثق بي",
+
+        // Availability
+        avail_title: "التوفر",
+        avail_status: "متاح للمشاريع الدولية اعتباراً من أغسطس 2026",
+        avail_location: "مقيم حالياً في يريفان، أرمينيا",
+        avail_regions_title: "متاح للمشاريع في:",
+        avail_r1_h: "الشرق الأوسط",
+        avail_r1_p: "قطر، الإمارات، السعودية، البحرين",
+        avail_r2_h: "أوروبا",
+        avail_r2_p: "جميع الأسواق الأوروبية",
+        avail_r3_h: "آسيا",
+        avail_r3_p: "الصين، اليابان، كوريا الجنوبية والمنطقة الأوسع",
+        avail_r4_h: "الأمريكتان",
+        avail_r4_p: "أمريكا الشمالية وأمريكا الجنوبية",
+
+        // Telegram Popup
+        tg_online: "متصل الآن",
+        tg_message: "مرحباً! أنا متصل الآن. لا تتردد في مراسلتي عبر تيليغرام بشأن مشروعك.",
+        tg_btn: "راسلني على تيليغرام",
+
         // WhatsApp
         whatsapp_message: "مرحبًا! أنا مهتم بخدماتك.",
     },
@@ -371,14 +473,14 @@ const translations = {
         // Hero Section
         hero_greeting: "你好，我是",
         hero_name: "阿列克谢·拉扎列夫",
-        hero_title: "技术经理 | 覆盖层经理 | 团队合作者与建设者",
+        hero_title: "技术经理 | 临时基础设施经理 | 团队领导者",
         hero_subtitle: "在全球范围内提供世界级的活动制作和技术管理服务",
         hero_cta: "联系我",
         hero_download: "下载简历",
 
         // About Section
         about_heading: "关于我",
-        about_text: "拥有17年以上活动制作、技术管理和国际团队领导经验的专业人士。专注于大型活动，包括FIFA世界杯、奥运会和太阳马戏团制作。在覆盖层管理、现场监督和跨文化团队协调方面具有专业知识。",
+        about_text: "拥有17年以上活动制作、技术管理和国际团队领导经验的专业人士。专注于大型活动，包括国际足联世界杯、奥运会和太阳马戏团制作。在临时基础设施管理、现场监督和跨文化团队协调方面具有专业知识。",
         about_achievement1: "17年以上经验",
         about_achievement2: "2018和2022世界杯",
         about_achievement3: "2014索契奥运会",
@@ -388,8 +490,8 @@ const translations = {
         services_heading: "我的服务",
         service1_title: "技术管理",
         service1_desc: "为大型活动提供全面的技术监督，包括设备规划、人员协调和现场监督。确保从安装到拆除的无缝执行。",
-        service2_title: "覆盖层和场地管理",
-        service2_desc: "为重大体育赛事和展览提供专业的覆盖层管理。专注于FIFA标准、场馆改造和临时基础设施协调。",
+        service2_title: "临时基础设施和场地管理",
+        service2_desc: "为重大体育赛事和展览提供临时基础设施管理。专注于国际标准、场馆改造和临时设施协调。",
         service3_title: "国际团队领导",
         service3_desc: "建立和管理20至500多名专业人员的多元文化团队。在跨境物流、住宿、交通和多语言协调方面具有专业知识。",
 
@@ -401,9 +503,9 @@ const translations = {
         exp1_desc: "领导大型竞技场活动的技术运营，管理设备、人员协调和确保无缝执行。",
 
         exp2_company: "United for Manpower Solutions",
-        exp2_role: "主管、覆盖层经理",
+        exp2_role: "主管、临时基础设施经理",
         exp2_period: "多哈，卡塔尔",
-        exp2_desc: "管理2022年FIFA世界杯的国际团队，监督主要体育场的覆盖层安装和场馆改造。",
+        exp2_desc: "管理2022年国际足联世界杯的国际团队，监督主要体育场的临时基础设施安装和场馆改造。",
 
         exp3_company: "Röder 俄罗斯",
         exp3_role: "技术经理",
@@ -445,9 +547,21 @@ const translations = {
         exp10_period: "莫斯科，俄罗斯",
         exp10_desc: "管理企业活动、音乐会和娱乐制作的活动物流和技术要求。",
 
+        // Workforce Section
+        workforce_heading: "国际活动专业团队",
+        workforce_intro: "多年来，我为各大国际活动、展览及巡演制作组织和部署了专业的安装团队。",
+        workforce_teams_title: "可提供的团队包括：",
+        workforce_item1: "舞台场景安装队",
+        workforce_item2: "舞台与悬挂技术人员",
+        workforce_item3: "展馆建设团队",
+        workforce_item4: "场馆临时基础设施安装队",
+        workforce_detail1: "团队由具有国际活动经验的专业技术人员和督导组成。",
+        workforce_detail2: "安装队和技术团队可承接欧洲、中东及亚洲的国际项目。",
+        workforce_stat_label: "每项目技术人员数",
+        workforce_regions: "欧洲 · 中东 · 亚洲",
+
         // Portfolio Section
-        portfolio_heading: "作品集",
-        portfolio_subtitle: "重大活动和制作",
+        portfolio_heading: "重大活动经验",
         portfolio_item1_title: "音乐会制作",
         portfolio_item1_desc: "为主要艺术家和音乐节提供大型音乐会技术管理和舞台制作。",
         portfolio_item2_title: "电影和影视活动",
@@ -474,6 +588,28 @@ const translations = {
         // Footer
         footer_text: "专业活动管理和技术制作服务",
         footer_rights: "版权所有",
+
+        // Trusted By
+        trusted_label: "合作方",
+
+        // Availability
+        avail_title: "可用性",
+        avail_status: "2026年8月起可参与国际项目",
+        avail_location: "目前常驻亚美尼亚埃里温",
+        avail_regions_title: "可接受以下地区项目：",
+        avail_r1_h: "中东地区",
+        avail_r1_p: "卡塔尔、阿联酋、沙特阿拉伯、巴林",
+        avail_r2_h: "欧洲",
+        avail_r2_p: "所有欧洲市场",
+        avail_r3_h: "亚洲",
+        avail_r3_p: "中国、日本、韩国及更广泛地区",
+        avail_r4_h: "美洲",
+        avail_r4_p: "北美洲与南美洲",
+
+        // Telegram Popup
+        tg_online: "在线",
+        tg_message: "您好！我现在在线，欢迎通过 Telegram 联系我洽谈项目。",
+        tg_btn: "通过 Telegram 联系",
 
         // WhatsApp
         whatsapp_message: "你好！我对您的服务感兴趣。",
