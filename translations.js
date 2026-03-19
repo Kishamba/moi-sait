@@ -5,7 +5,7 @@ const translations = {
         nav_about: "About",
         nav_services: "Services",
         nav_experience: "Experience",
-        nav_portfolio: "Portfolio",
+        nav_portfolio: "Major Events",
         nav_contact: "Contact",
 
         // Hero Section
@@ -159,7 +159,7 @@ const translations = {
         nav_about: "Обо мне",
         nav_services: "Услуги",
         nav_experience: "Опыт",
-        nav_portfolio: "Портфолио",
+        nav_portfolio: "Крупные проекты",
         nav_contact: "Контакты",
 
         // Hero Section
@@ -313,7 +313,7 @@ const translations = {
         nav_about: "عني",
         nav_services: "الخدمات",
         nav_experience: "الخبرة",
-        nav_portfolio: "المعرض",
+        nav_portfolio: "الفعاليات الكبرى",
         nav_contact: "اتصل",
 
         // Hero Section
@@ -467,7 +467,7 @@ const translations = {
         nav_about: "关于",
         nav_services: "服务",
         nav_experience: "经验",
-        nav_portfolio: "作品集",
+        nav_portfolio: "重大活动",
         nav_contact: "联系",
 
         // Hero Section
