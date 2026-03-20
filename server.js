@@ -192,6 +192,19 @@ app.post('/api/visitor', async (req, res) => {
 
     console.log(`📊 Visitor tracked: ${ipInfo.city}, ${ipInfo.country} (${language}) from ${referrer}`);
 
+    // Send Telegram notification
+    const visitorMessage = `👁 *Новый посетитель на сайте!*\n\n` +
+      `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name || ipInfo.country}\n` +
+      `🗣 Язык: ${language || 'unknown'}\n` +
+      `🔗 Источник: ${referrer}\n` +
+      `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
+
+    try {
+      await bot.sendMessage(CHAT_ID, visitorMessage, { parse_mode: 'Markdown' });
+    } catch (botError) {
+      console.error('❌ Telegram visitor notification error:', botError.message);
+    }
+
     res.json({ success: true, location: ipInfo });
   } catch (error) {
     console.error('Error tracking visitor:', error);
