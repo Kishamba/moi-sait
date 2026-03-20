@@ -197,7 +197,7 @@ app.post('/api/visitor', async (req, res) => {
       `📍 Локация: ${ipInfo.city}, ${ipInfo.country_name || ipInfo.country}\n` +
       `🗣 Язык: ${language || 'unknown'}\n` +
       `🔗 Источник: ${referrer}\n` +
-      `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}`;
+      `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Yerevan' })}`;
 
     try {
       await bot.sendMessage(CHAT_ID, visitorMessage, { parse_mode: 'Markdown' });
