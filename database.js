@@ -91,12 +91,31 @@ const dbOps = {
     // We'll use a standardized query approach or just logic
     let query;
     if (type === 'postgres') {
-      query = `SELECT id FROM visitors WHERE ip = $1 AND timestamp > NOW() - INTERVAL '30 minutes' LIMIT 1`;
+      query = `SELECT id FROM visitors WHERE ip = $1 AND timestamp > NOW() - INTERVAL '10 minutes' LIMIT 1`;
       const res = await db.query(query, [ip]);
       return res.rows[0];
     } else {
-      query = `SELECT id FROM visitors WHERE ip = ? AND timestamp > datetime('now', '-30 minutes') LIMIT 1`;
+      query = `SELECT id FROM visitors WHERE ip = ? AND timestamp > datetime('now', '-10 minutes') LIMIT 1`;
       return db.prepare(query).get(ip);
+    }
+  },
+
+  getTotalVisitors: async () => {
+    if (type === 'postgres') {
+      const res = await db.query('SELECT COUNT(*) as count FROM visitors');
+      return parseInt(res.rows[0].count, 10);
+    } else {
+      const row = db.prepare('SELECT COUNT(*) as count FROM visitors').get();
+      return row ? row.count : 0;
+    }
+  },
+
+  deleteVisitorsByIp: async (ip) => {
+    const query = `DELETE FROM visitors WHERE ip = ?`;
+    if (type === 'postgres') {
+      await db.query(query.replace('?', '$1'), [ip]);
+    } else {
+      db.prepare(query).run(ip);
     }
   },
 
