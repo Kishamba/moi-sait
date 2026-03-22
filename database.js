@@ -110,6 +110,16 @@ const dbOps = {
     }
   },
 
+  getVisitsByIp: async (ip) => {
+    if (type === 'postgres') {
+      const res = await db.query('SELECT COUNT(*) as count FROM visitors WHERE ip = $1', [ip]);
+      return parseInt(res.rows[0].count, 10);
+    } else {
+      const row = db.prepare('SELECT COUNT(*) as count FROM visitors WHERE ip = ?').get(ip);
+      return row ? row.count : 0;
+    }
+  },
+
   deleteVisitorsByIp: async (ip) => {
     const query = `DELETE FROM visitors WHERE ip = ?`;
     if (type === 'postgres') {

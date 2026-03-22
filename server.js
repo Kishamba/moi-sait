@@ -192,8 +192,9 @@ app.post('/api/visitor', async (req, res) => {
 
     console.log(`📊 Visitor tracked: ${ipInfo.city}, ${ipInfo.country} (${language}) from ${referrer}`);
 
-    // Get total visitor count
+    // Get visit counts
     const totalVisitors = await db.getTotalVisitors();
+    const ipVisits = await db.getVisitsByIp(ipInfo.ip);
 
     // Send Telegram notification
     const visitorMessage = `👁 *Новый посетитель на сайте!*\n\n` +
@@ -201,7 +202,8 @@ app.post('/api/visitor', async (req, res) => {
       `🗣 Язык: ${language || 'unknown'}\n` +
       `🔗 Источник: ${referrer}\n` +
       `⏰ Время: ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Yerevan' })}\n\n` +
-      `📊 *Всего посещений: ${totalVisitors}*`;
+      `🔁 Этот IP заходил: *${ipVisits} раз*\n` +
+      `📊 Всего посещений на сайте: *${totalVisitors}*`;
 
     try {
       await bot.sendMessage(CHAT_ID, visitorMessage, { parse_mode: 'Markdown' });
